@@ -16,7 +16,6 @@ public class IndexController {
   private ItemRepository itemRepo;
 
   @GetMapping("/")
-  //TODO why is it string
   public String itemList(Model m){
     List<Item> itemList = itemRepo.findAllItems();
     m.addAttribute("itemlist",itemList);

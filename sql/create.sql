@@ -14,7 +14,7 @@ CREATE TABLE users
 CREATE TABLE items(
 	id 						INT UNIQUE NOT NULL,
 	name 					VARCHAR(255) NOT NULL,
-	registration_date 		DATE NOT NULL,
+	registration_date 		TIMESTAMP NOT NULL,
 	calibration_date 		DATE,
 	calibration_interval 	INT,
 	next_calibration_date 	DATE,

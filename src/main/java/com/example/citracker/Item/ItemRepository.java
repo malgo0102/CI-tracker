@@ -6,6 +6,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +21,8 @@ public class ItemRepository {
     Item item = new Item();
     item.setId(rs.getInt("id"));
     item.setName(rs.getString("name"));
-    Date regDate = rs.getDate("registration_date");
-    item.setRegistrationDate(regDate == null ? null : regDate.toLocalDate());
+    Date registrationDate = rs.getDate("registration_date");
+    item.setRegistrationDate(registrationDate == null ? null : registrationDate.toLocalDate());
     Date calDate = rs.getDate("calibration_date");
     item.setCalibrationDate(calDate == null ? null : calDate.toLocalDate());
     item.setCalibrationInterval(rs.getInt("calibration_interval"));

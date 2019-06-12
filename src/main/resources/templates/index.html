@@ -15,6 +15,12 @@
             <div class="jumbotron">
                 <h1 class="display-4">Configuration Item Tracker</h1>
                 <hr>
+                <th scope="col">
+                    <a class="btn btn-primary" th:href="'/manage/items/add'">
+                        Add item
+                    </a>
+                </th>
+                <hr>
                 <table class="table table-dark table-hover">
                     <thead>
                     <tr>
@@ -47,11 +53,11 @@
                         <td th:text="${item.owner}"></td>
                         <td th:text="${item.itemCreator}"></td>
 
-<!--                        <td>-->
-<!--                            <a class="btn btn-primary" th:href="'/manage/items/edit/' + ${item.id}">-->
-<!--                                Edit-->
-<!--                            </a>-->
-<!--                        </td>-->
+                        <td>
+                            <a class="btn btn-primary" th:href="'/manage/items/edit/' + ${item.id}">
+                                Edit
+                            </a>
+                        </td>
 <!--                        <td>-->
 <!--                            &lt;!&ndash; Button trigger modal &ndash;&gt;-->
 <!--                            <button type="button" class="btn btn-outline-danger"-->
@@ -102,11 +108,6 @@
                     </tbody>
 
                 </table>
-<!--                <th scope="col">-->
-<!--                    <a class="btn btn-primary" th:href="'/manage/items/add'">-->
-<!--                        Add item-->
-<!--                    </a>-->
-<!--                </th>-->
             </div>
         </div>
     </main>
