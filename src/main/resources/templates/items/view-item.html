@@ -66,8 +66,10 @@
                             <span th:if="${item.getOwner().isEmpty()}">N/A</span>
                         </p>
                         <p><b>Entry created by:</b>
-                            <span th:if="${item.getOwner()}">
-                                None
+                            <span>
+                                <a th:if="${item.getOwner()}"
+                                    th:href="'/user/' + ${item.getOwner()}">
+                                </a>
                             </span>
 <!--                            <th:block th:each="user, iter:${item.getItemCreator()}">-->
 <!--                                <span th:text="${item.getName()} + (${iter.last} ? '' : ', ')"></span><br>-->

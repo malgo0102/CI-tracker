@@ -1,5 +1,6 @@
 package com.example.citracker.Item;
 
+import com.example.citracker.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,8 @@ public class ItemController {
 
   @Autowired
   private ItemRepository itemRepo;
+  @Autowired
+  private UserRepository userRepo;
 
   //item detailed view
   @GetMapping("/item/{id}")
@@ -25,6 +28,7 @@ public class ItemController {
   @GetMapping("manage/items/add")
   public String create(Model m) {
     m.addAttribute("itemform", new Item());
+    m.addAttribute("userlist", userRepo.findAllUsers());
 
     return "items/add-item";
   }
