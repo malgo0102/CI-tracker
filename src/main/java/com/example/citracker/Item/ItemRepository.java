@@ -76,4 +76,7 @@ public class ItemRepository {
         item.getCalibrationInterval(), item.getNextCalibrationDate(), item.getPicture(),
         item.getDescription(), item.getNotes(),item.getOwner(), item.getItemCreator());
   }
+  public void delete(int id){
+    jdbc.update("DELETE FROM items WHERE id = ?", id);
+  }
 }

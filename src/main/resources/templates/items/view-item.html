@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${item.getName()}"></title>
+
+    <link th:replace="fragments :: bootstrap_head">
+</head>
+<body>
+<div class="d-flex flex-column sticky-footer-wrapper">
+    <div th:replace="fragments :: navbar"></div>
+
+    <main class="flex-fill">
+        <div class="container">
+            <div class="jumbotron">
+                <div class="row">
+                    <h3 class="display-4" th:text="${item.getName()}"></h3>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-8">
+                        <p>
+                            <b>ID:</b>
+                            <span th:text="${item.getId()}"></span>
+                        </p>
+                        <p>
+                            <b>Registration date:</b>
+                            <span th:text="${item.getRegistrationDate()}"></span>
+                        </p>
+                        <p>
+                            <b>Calibration date:</b>
+                            <span th:unless="${item.getCalibrationDate()== null}"
+                                  th:text="${item.getCalibrationDate()}"></span>
+                            <span th:if="${item.getCalibrationDate()}== null">N/A</span>
+                        </p>
+                        <p>
+                            <b>Calibration interval:</b>
+                            <th:block th:unless="${item.getCalibrationInterval()} == 0">
+                            <span
+                                    th:text="${item.getCalibrationInterval()}"></span> months
+                            </th:block>
+                            <span th:if="${item.getCalibrationInterval()} == 0">N/A</span>
+                        </p>
+                        <p>
+                            <b>Next calibration on:</b>
+                            <span th:unless="${item.getNextCalibrationDate()== null}"
+                                  th:text="${item.getNextCalibrationDate()}"></span>
+                            <span th:if="${item.getNextCalibrationDate()}== null">N/A</span>
+                        </p>
+                        <p>
+                            <b>Description:</b>
+                            <span th:unless="${item.getDescription().isEmpty()}"
+                                  th:text="${item.getDescription()}"></span>
+                            <span th:if="${item.getDescription().isEmpty()}">N/A</span>
+                        </p>
+                        <p>
+                            <b>Notes:</b>
+                            <span th:unless="${item.getNotes().isEmpty()}"
+                                  th:text="${item.getNotes()}"></span>
+                            <span th:if="${item.getNotes().isEmpty()}">N/A</span>
+                        </p>
+                        <p>
+                            <b>Item owner:</b>
+                            <span th:unless="${item.getOwner().isEmpty()}"
+                                  th:text="${item.getOwner()}"></span>
+                            <span th:if="${item.getOwner().isEmpty()}">N/A</span>
+                        </p>
+                        <p><b>Entry created by:</b>
+                            <span th:if="${item.getOwner()}">
+                                None
+                            </span>
+<!--                            <th:block th:each="user, iter:${item.getItemCreator()}">-->
+<!--                                <span th:text="${item.getName()} + (${iter.last} ? '' : ', ')"></span><br>-->
+<!--                            </th:block>-->
+                        </p>
+                    </div>
+                    <div class="col-md-4" th:unless="${item.getPicture().isEmpty()}">
+                        <img th:if="${item.getPicture()}" th:src="${item.getPicture()}"
+                             th:alt="'Picture for ' + ${item.getName()}" class="img-fluid">
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="fragments :: footer"></div>
+</div>
+<div th:replace="fragments :: bootstrap_body"></div>
+</body>
+</html>

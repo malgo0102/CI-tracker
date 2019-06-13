@@ -3,10 +3,7 @@ package com.example.citracker.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,6 +14,14 @@ public class ItemController {
   @Autowired
   private ItemRepository itemRepo;
 
+  //item detailed view
+  @GetMapping("/item/{id}")
+  public String findItem(@PathVariable(name = "id") int id, Model model) {
+    model.addAttribute("item", itemRepo.findItemById(id));
+
+    return "items/view-item";
+  }
+
   @GetMapping("manage/items/add")
   public String create(Model m) {
     m.addAttribute("itemform", new Item());
@@ -25,7 +30,7 @@ public class ItemController {
   }
 
   @PostMapping("/manage/items/add")
-  public String saveItem(@ModelAttribute Item i) {
+  public String save(@ModelAttribute Item i) {
     i.setRegistrationDate(LocalDate.now());
     itemRepo.insert(i);
 
@@ -45,6 +50,20 @@ public class ItemController {
 
     return "redirect:/";
 
+  }
+
+  @GetMapping ("/manage/items/delete/{id}")
+  public String delete(@PathVariable (name = "id") int id, Model m){
+    m.addAttribute("item", itemRepo.findItemById(id));
+
+    return "items/delete-item";
+  }
+
+  @PostMapping ("/manage/items/delete")
+  public String delete(@RequestParam (name = "id") int id){
+    itemRepo.delete(id);
+
+    return "redirect:/";
   }
 
 }

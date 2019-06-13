@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete item</title>
+
+    <link th:replace="fragments :: bootstrap_head">
+</head>
+<body>
+<div class="d-flex flex-column sticky-footer-wrapper">
+    <div th:replace="fragments :: navbar"></div>
+
+    <main class="flex-fill">
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="display-4">Delete item</h1>
+                <hr>
+                <form action="/manage/items/delete/" method="post" th:object="${item}">
+                    <input type="hidden" th:value="${item.id}" th:field="${item.id}" name="id">
+                    <div class="form-group">
+                        <p th:text="'Are you sure you want to permanently delete '+ ${item.id}+ ' ' + ${item.name}"></p>
+                        <p></p>
+                    </div>
+                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    <a class="btn btn-outline-primary" href="/">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="fragments :: footer"></div>
+</div>
+<div th:replace="fragments :: bootstrap_body"></div>
+</body>
+</html>
