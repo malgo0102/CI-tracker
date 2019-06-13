@@ -1,5 +1,7 @@
 package com.example.citracker.Item;
 
+import com.example.citracker.User.User;
+
 import java.sql.Time;
 import java.time.LocalDate;
 
@@ -14,7 +16,7 @@ public class Item {
   private String description;
   private String notes;
   private String owner;
-  private String itemCreator;
+  private User user;
 
   public int getId() {
     return id;
@@ -96,12 +98,12 @@ public class Item {
     this.owner = owner;
   }
 
-  public String getItemCreator() {
-    return itemCreator;
+  public User getUser() {
+    return user;
   }
 
-  public void setItemCreator(String itemCreator) {
-    this.itemCreator = itemCreator;
+  public void setUser(User user) {
+    this.user = user;
   }
 
 

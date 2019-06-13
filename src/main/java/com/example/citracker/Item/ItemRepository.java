@@ -1,5 +1,6 @@
 package com.example.citracker.Item;
 
+import com.example.citracker.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -14,8 +15,8 @@ import java.util.List;
 public class ItemRepository {
   @Autowired
   private JdbcTemplate jdbc;
-  //@Autowired
-  //private UserRepository userRepo;
+  @Autowired
+  private UserRepository userRepo;
 
   private Item extractItemFromRowSet(SqlRowSet rs){
     Item item = new Item();
@@ -32,7 +33,7 @@ public class ItemRepository {
     item.setDescription(rs.getString("description"));
     item.setNotes(rs.getString("notes"));
     item.setOwner(rs.getString("owner"));
-    item.setItemCreator(rs.getString("item_creator_id"));
+    item.setUser(userRepo.findUserById(rs.getInt("item_creator_id")));
 
     return item;
   }
@@ -65,16 +66,16 @@ public class ItemRepository {
         "VALUES(?,?,?,?,?,?,?,?,?,?,?)",
       item.getId(),item.getName(),item.getRegistrationDate(),item.getCalibrationDate(),
         item.getCalibrationInterval(), item.getNextCalibrationDate(), item.getPicture(),
-        item.getDescription(), item.getNotes(),item.getOwner(), item.getItemCreator());
+        item.getDescription(), item.getNotes(),item.getOwner(), item.getUser().getId());
   }
 
   public void update (Item item){
-    jdbc.update("UPDATE items SET registration_date = ?, calibration_date = ?, " +
+    jdbc.update("UPDATE items SET id = ?, name = ?, registration_date =?, calibration_date = ?, " +
             "calibration_interval = ?, next_calibration_date = ?, picture = ?, description = ?, " +
-            "notes = ?, owner = ?, item_creator_id = ? WHERE id=?,",
-        item.getId(),item.getName(),item.getRegistrationDate(),item.getCalibrationDate(),
+            "notes = ?, owner = ?, item_creator_id = ? WHERE id=?;",
+        item.getId(),item.getName(), item.getRegistrationDate(), item.getCalibrationDate(),
         item.getCalibrationInterval(), item.getNextCalibrationDate(), item.getPicture(),
-        item.getDescription(), item.getNotes(),item.getOwner(), item.getItemCreator());
+        item.getDescription(), item.getNotes(),item.getOwner(), item.getUser().getId(), item.getId());
   }
   public void delete(int id){
     jdbc.update("DELETE FROM items WHERE id = ?", id);

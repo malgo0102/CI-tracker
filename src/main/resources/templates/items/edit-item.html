@@ -13,17 +13,26 @@
     <main class="flex-fill">
         <div class="container">
             <div class="jumbotron">
-                <h1 class="display-4">Edit an item</h1>
+                <h1 class="display-4">
+                    <p th:text="'Edit ' + ${itemform.id}+ ' ' + ${itemform.name}">
+                    </p>
+                </h1>
                 <hr>
                 <form action="/manage/items/edit/" method="post" th:object="${itemform}">
-                    <div class="form-group">
-                        <label for="id">ID:</label>
-                        <input type="text" class="form-control" th:field="${itemform.id}" id="id">
-                    </div>
+                    <input type="hidden" th:field="${itemform.id}">
+<!--                    <div class="form-group">-->
+<!--                        <label for="name">ID:</label>-->
+<!--                        <input type="text" class="form-control" th:field="${itemform.id}" id="id">-->
+<!--                    </div>-->
                     <div class="form-group">
                         <label for="name">Name:</label>
                         <input type="text" class="form-control" th:field="${itemform.name}" id="name">
                     </div>
+                    <input type="hidden" th:field="${itemform.registrationDate}">
+<!--                    <div class="form-group">-->
+<!--                        <label for="name">Registration date:</label>-->
+<!--                        <input type="text" class="form-control" th:field="${itemform.registrationDate}" id="registration_date">-->
+<!--                    </div>-->
                     <div class="form-group">
                         <label for="calibration_date">Calibration date:</label>
                         <input type="text" class="form-control" th:field="${itemform.calibrationDate}" id="calibration_date">
@@ -33,7 +42,7 @@
                         <input type="text" class="form-control" th:field="${itemform.calibrationInterval}" id="calibration_interval">
                     </div>
                     <div class="form-group">
-                        <label for="next_calibration_date">Next calibration on:</label>
+                        <label for="next_calibration_date">Next calibration date:</label>
                         <input type="text" class="form-control" th:field="${itemform.nextCalibrationDate}" id="next_calibration_date">
                     </div>
                     <div class="form-group">
@@ -53,8 +62,8 @@
                         <input type="text" class="form-control" th:field="${itemform.owner}" id="owner">
                     </div>
                     <div class="form-group">
-                        <label for="item_creator">Entry created by:</label>
-                        <input type="text" class="form-control" th:field="${itemform.itemCreator}" id="item_creator">
+                        <label for="user">Entry created by:</label>
+                        <input type="text" class="form-control" th:field="${itemform.user}" id="user">
                     </div>
                     <button type="submit" class="btn btn-primary">Save changes</button>
                     <a class="btn btn-outline-danger" href="/">Cancel</a>

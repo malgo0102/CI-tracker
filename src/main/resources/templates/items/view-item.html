@@ -42,7 +42,7 @@
                             <span th:if="${item.getCalibrationInterval()} == 0">N/A</span>
                         </p>
                         <p>
-                            <b>Next calibration on:</b>
+                            <b>Next calibration date:</b>
                             <span th:unless="${item.getNextCalibrationDate()== null}"
                                   th:text="${item.getNextCalibrationDate()}"></span>
                             <span th:if="${item.getNextCalibrationDate()}== null">N/A</span>

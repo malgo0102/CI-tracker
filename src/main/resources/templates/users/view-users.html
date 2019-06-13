@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+
+    <link th:replace="fragments :: bootstrap_head">
+</head>
+<body>
+<div class="d-flex flex-column sticky-footer-wrapper">
+    <div th:replace="fragments :: navbar"></div>
+
+    <main class="flex-fill">
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="display-4">Users</h1>
+                <hr>
+                <th scope="col">
+                    <a class="btn btn-outline-dark" th:href="'/manage/users/add'">
+                        Add user
+                    </a>
+                </th>
+                <hr>
+                <table class="table table-sm table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Username:</th>
+                        <th scope="col">Password:</th>
+                        <th scope="col">E-mail:</th>
+                        <th scope="col">Phone no:</th>
+                        <th scope="col">Full name:</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user:${userlist}">
+                        <td th:text="${user.username}"></td>
+                        <td th:text="${user.password}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${user.phoneNo}"></td>
+                        <td th:text="${user.fullName}"></td>
+                        <td>
+                            <a class="btn btn-outline-secondary" th:href="'/manage/users/edit/' + ${user.id}">
+                                Edit
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-danger" th:href="'/manage/users/delete/' + ${user.id}">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="fragments :: footer"></div>
+</div>
+<div th:replace="fragments :: bootstrap_body"></div>
+</body>
+</html>

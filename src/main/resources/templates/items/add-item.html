@@ -33,7 +33,7 @@
                         <input type="text" class="form-control" th:field="${itemform.calibrationInterval}" id="calibration_interval">
                     </div>
                     <div class="form-group">
-                        <label for="next_calibration_date">Next calibration on:</label>
+                        <label for="next_calibration_date">Next calibration date:</label>
                         <input type="text" class="form-control" th:field="${itemform.nextCalibrationDate}" id="next_calibration_date">
                     </div>
                     <div class="form-group">
@@ -53,8 +53,12 @@
                         <input type="text" class="form-control" th:field="${itemform.owner}" id="owner">
                     </div>
                     <div class="form-group">
-                        <label for="item_creator">Entry created by:</label>
-                        <input type="text" class="form-control" th:field="${itemform.itemCreator}" id="item_creator">
+                        <label for="user">Entry created by:</label>
+                        <select class="form-control" th:field="${itemform.user}" id="user">
+                            <option th:each="user:${userlist}" th:text="${user.getUsername()}"
+                                th:value="${user.getId()}">
+                            </option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Add item</button>
                     <a class="btn btn-outline-danger" href="/">Cancel</a>

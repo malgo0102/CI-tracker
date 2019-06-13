@@ -16,7 +16,7 @@ public class IndexController {
   private ItemRepository itemRepo;
 
   @GetMapping("/")
-  public String itemList(Model m){
+  public String listItems(Model m){
     List<Item> itemList = itemRepo.findAllItems();
     m.addAttribute("itemlist",itemList);
 
