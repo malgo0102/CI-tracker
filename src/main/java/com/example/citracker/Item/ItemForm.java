@@ -1,23 +1,17 @@
 package com.example.citracker.Item;
 
-import com.example.citracker.User.User;
-
-import java.sql.Time;
-import java.time.LocalDate;
-
-public class Item {
+public class ItemForm {
   private int id;
   private String name;
-  private LocalDate registrationDate;
-  private LocalDate calibrationDate;
-  //TODO LocalDate plusMonths()
+  private String registrationDate;
+  private String calibrationDate;
   private int calibrationInterval;
-  private LocalDate nextCalibrationDate;
+  private String nextCalibrationDate;
   private String picture;
   private String description;
   private String notes;
   private String owner;
-  private User user;
+  private int userId;
 
   public int getId() {
     return id;
@@ -35,19 +29,19 @@ public class Item {
     this.name = name;
   }
 
-  public LocalDate getRegistrationDate() {
+  public String getRegistrationDate() {
     return registrationDate;
   }
 
-  public void setRegistrationDate(LocalDate registrationDate) {
+  public void setRegistrationDate(String registrationDate) {
     this.registrationDate = registrationDate;
   }
 
-  public LocalDate getCalibrationDate() {
+  public String getCalibrationDate() {
     return calibrationDate;
   }
 
-  public void setCalibrationDate(LocalDate calibrationDate) {
+  public void setCalibrationDate(String calibrationDate) {
     this.calibrationDate = calibrationDate;
   }
 
@@ -59,11 +53,11 @@ public class Item {
     this.calibrationInterval = calibrationInterval;
   }
 
-  public LocalDate getNextCalibrationDate() {
+  public String getNextCalibrationDate() {
     return nextCalibrationDate;
   }
 
-  public void setNextCalibrationDate(LocalDate nextCalibrationDate) {
+  public void setNextCalibrationDate(String nextCalibrationDate) {
     this.nextCalibrationDate = nextCalibrationDate;
   }
 
@@ -99,14 +93,11 @@ public class Item {
     this.owner = owner;
   }
 
-  public User getUser() {
-    return user;
+  public int getUserId() {
+    return userId;
   }
 
-  public void setUser(User user) {
-    this.user = user;
+  public void setUserId(int userId) {
+    this.userId = userId;
   }
-
-
-
 }

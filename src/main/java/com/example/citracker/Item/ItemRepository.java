@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,4 +81,42 @@ public class ItemRepository {
   public void delete(int id){
     jdbc.update("DELETE FROM items WHERE id = ?", id);
   }
+
+  public Item convertFormToItem(ItemForm itemData) {
+    Item item = new Item();
+
+    item.setId(itemData.getId());
+    item.setName(itemData.getName());
+     LocalDate registrationDate;
+     registrationDate = LocalDate.parse(itemData.getRegistrationDate());
+    item.setRegistrationDate(registrationDate);
+    if(itemData.getCalibrationDate()== ("")){
+      item.setCalibrationDate(null);
+    }
+    else{
+      LocalDate calibrationDate;
+      calibrationDate = LocalDate.parse(itemData.getCalibrationDate());
+      item.setCalibrationDate(calibrationDate);
+    }
+    item.setCalibrationInterval(item.getCalibrationInterval());
+    if(itemData.getNextCalibrationDate()== ("")){
+      item.setNextCalibrationDate(null);
+    }
+    else{
+      LocalDate nextCalibrationDate;
+      nextCalibrationDate = LocalDate.parse(itemData.getNextCalibrationDate());
+      item.setNextCalibrationDate(nextCalibrationDate);
+    }
+    item.setPicture(itemData.getPicture());
+    item.setDescription(itemData.getDescription());
+    item.setNotes(itemData.getNotes());
+    item.setOwner(itemData.getOwner());
+    item.setUser(userRepo.findUserById(itemData.getUserId()));
+
+    return item;
+  }
+
 }
+
+
+
