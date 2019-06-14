@@ -53,10 +53,10 @@ public class UserRepository {
 
   public void update(User user){
     jdbc.update("UPDATE users SET username = ?, password = ?, email = ?, phone_no = ?, " +
-            "full_name = ?, WHERE id=?",
+            "full_name = ? WHERE id=?",
         //TODO passwordEncoder.encodeuser.(user.getPassword())
         user.getUsername(), user.getPassword(), user.getEmail(), user.getPhoneNo(),
-        user.getFullName());
+        user.getFullName(), user.getId());
   }
 
   public void delete(int id){

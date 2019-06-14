@@ -16,6 +16,7 @@ public class Item {
   private String picture;
   private String description;
   private String notes;
+  //TODO owner as user?
   private String owner;
   private User user;
 

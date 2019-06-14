@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormat;
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 public class ItemController {
@@ -101,6 +102,11 @@ public class ItemController {
     return "redirect:/";
   }
 
+  @GetMapping("/search")
+  public String searchResult(@RequestParam (name="searchWord") String searchWord, Model m){
+    List<Item> resultList = itemRepo.searchText(searchWord);
+    m.addAttribute("resultlist",resultList);
 
-
+    return "items/searched-item";
+  }
 }

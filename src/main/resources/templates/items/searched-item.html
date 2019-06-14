@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Search result</title>
+
+    <link th:replace="fragments :: bootstrap_head">
+</head>
+<body>
+<div class="d-flex flex-column sticky-footer-wrapper">
+    <div th:replace="fragments :: navbar"></div>
+
+    <main class="flex-fill">
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="display-4">Search result</h1>
+                <form action="/manage/search/" method="post" th:object="${resultlist}">
+                    <div class="form-group">
+                        <label for="id" class="font-weight-bold">Search:</label>
+                        <input type="text" class="form-control" th:field="${searchWord}" id="id">
+                    </div>
+                <table class="table table-sm table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID:</th>
+                        <th scope="col">Name:</th>
+                        <!--                        <th scope="col">Registration date:</th>-->
+                        <!--                        <th scope="col">Calibration date:</th>-->
+                        <!--                        <th scope="col">Calibration interval</th>-->
+                        <th scope="col">Next calibration date:</th>
+                        <!--                        <th scope="col">Picture</th>-->
+                        <!--                        <th scope="col">Description</th>-->
+                        <!--                        <th scope="col">Notes</th>-->
+                        <th scope="col">Item owner:</th>
+                        <!--                        <th scope="col">Entry created by</th>-->
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="result:${resultlist}">
+                        <td th:text="${result.id}"></td>
+                        <td>
+                            <a th:text="${result.name}"
+                               th:href="'/item/' + ${result.getId()}">
+                            </a>
+                        </td>
+                        <!--                        <td th:text="${item.registrationDate}"></td>-->
+                        <!--                        <td th:text="${item.calibrationDate}"></td>-->
+                        <!--                        <td th:text="${item.calibrationInterval}"></td>-->
+                        <td th:text="${result.nextCalibrationDate}"></td>
+                        <!--                        <td th:text="${item.picture}"></td>-->
+                        <!--                        <td th:text="${item.description}"></td>-->
+                        <!--                        <td th:text="${item.notes}"></td>-->
+                        <td th:text="${result.owner}"></td>
+                        <!--                        <td th:text="${item.itemCreator}"></td>-->
+
+                        <td>
+                            <a class="btn btn-outline-secondary" th:href="'/manage/items/edit/' + ${item.id}">
+                                Edit
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-danger" th:href="'/manage/items/delete/' + ${item.id}">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="fragments :: footer"></div>
+</div>
+<div th:replace="fragments :: bootstrap_body"></div>
+</body>
+</html>

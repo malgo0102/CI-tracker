@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Delete item</title>
+    <title>Delete user</title>
 
     <link th:replace="fragments :: bootstrap_head">
 </head>
@@ -13,13 +13,13 @@
     <main class="flex-fill">
         <div class="container">
             <div class="jumbotron">
-                <h1 class="display-4">Delete item</h1>
+                <h1 class="display-4">Delete user</h1>
                 <hr>
-                <form action="/manage/items/delete/" method="post" th:object="${item}">
-                    <input type="hidden" th:value="${item.id}" th:field="${item.id}" name="id">
+                <form action="/manage/users/delete/" method="post" th:object="${user}">
+                    <input type="hidden" th:value="${user.id}" th:field="${user.id}" name="id">
                     <div class="form-group">
-                        <p th:text="'Are you sure you want to permanently delete item: '+ ${item.id}
-                        + ' ' + ${item.name} + '?'"></p>
+                        <p th:text="'Are you sure you want to permanently delete user: '+
+                        ${user.username} + '?'"></p>
                         <p></p>
                     </div>
                     <button type="submit" class="btn btn-outline-danger">Delete</button>

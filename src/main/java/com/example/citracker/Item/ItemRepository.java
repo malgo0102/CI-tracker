@@ -10,6 +10,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 @Repository
@@ -115,6 +117,46 @@ public class ItemRepository {
 
     return item;
   }
+
+  public List<Item> searchText(String searchWord){
+    List<Item> searchedList = new ArrayList<>();
+    SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM items WHERE MATCH(id, name, " +
+        "registration_date, calibration_date," +
+        "item_creator_id) AGAINST('searchWord' IN BOOLEAN MODE)",searchWord);
+
+    while (rs.next()){
+      searchedList.add(extractItemFromRowSet(rs));
+    }
+    return searchedList;
+  }
+
+
+//  public List<Item> searchForItem(String searchWord){
+////convert Item to FormItem
+//    Collection<String> list = new LinkedList<String>();
+//    List<Item> itemList = findAllItems();
+//    for (Item item : itemList){
+//      list.add(item.getId()+"");
+//      list.add(item.getName());
+//      list.add(item.getRegistrationDate().toString());
+//      list.add(item.getCalibrationDate().toString());
+//      list.add(item.getCalibrationInterval()+"");
+//      list.add(item.getNextCalibrationDate().toString());
+//      list.add(item.getPicture());
+//      list.add(item.getDescription());
+//      list.add(item.getNotes());
+//      list.add(item.getOwner());
+//      list.add(item.getUser().getFullName());
+//      list.add(item.getUser().getUsername());
+//    }
+//    boolean result = list.contains(searchWord);
+//    if(result == true){
+//      return itemList;
+//    }
+//    else{
+//      return null;
+//    }
+//  }
 
 }
 
