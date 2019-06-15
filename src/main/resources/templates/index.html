@@ -15,6 +15,15 @@
             <div class="jumbotron">
                 <h1 class="display-4">Configuration Item Tracker</h1>
                 <hr>
+                <form action="/search_result/" method="get">
+                <div class="form-group">
+                    <label for="searchWord" class="font-weight-bold">Search: </label>
+                    <input type="text" class="form-control"
+                           id="searchWord" name="searchWord">
+                </div>
+                <button type="submit" class="btn btn-outline-primary">Search</button>
+                <br>
+                <hr>
                 <th scope="col">
                     <a class="btn btn-outline-dark" th:href="'/manage/items/add'">
                         Add item
@@ -24,7 +33,7 @@
                 <table class="table table-sm table-hover">
                     <thead>
                     <tr>
-                        <th scope="col">ID:</th>
+                        <th scope="col">CI ID:</th>
                         <th scope="col">Name:</th>
 <!--                        <th scope="col">Registration date:</th>-->
 <!--                        <th scope="col">Calibration date:</th>-->
@@ -41,7 +50,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="item:${itemlist}">
-                        <td th:text="${item.id}"></td>
+                        <td th:text="${item.ciId}"></td>
                         <td>
                             <a th:text="${item.name}"
                                 th:href="'/item/' + ${item.getId()}">
@@ -55,7 +64,7 @@
 <!--                        <td th:text="${item.description}"></td>-->
 <!--                        <td th:text="${item.notes}"></td>-->
                         <td th:text="${item.owner}"></td>
-<!--                        <td th:text="${item.itemCreator}"></td>-->
+<!--                        <td th:text="${item.itemUser}"></td>-->
 
                         <td>
                             <a class="btn btn-outline-secondary" th:href="'/manage/items/edit/' + ${item.id}">

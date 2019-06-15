@@ -2,6 +2,7 @@ package com.example.citracker.Item;
 
 public class ItemForm {
   private int id;
+  private String ciId;
   private String name;
   private String registrationDate;
   private String calibrationDate;
@@ -13,21 +14,17 @@ public class ItemForm {
   private String owner;
   private int userId;
 
-  public int getId() {
-    return id;
-  }
+  public int getId() { return id; }
 
-  public void setId(int id) {
-    this.id = id;
-  }
+  public void setId(int id) { this.id = id; }
 
-  public String getName() {
-    return name;
-  }
+  public String getCiId() { return ciId; }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+  public void setCiId(String ciId) { this.ciId = ciId; }
+
+  public String getName() { return name; }
+
+  public void setName(String name) { this.name = name; }
 
   public String getRegistrationDate() {
     return registrationDate;
@@ -61,43 +58,23 @@ public class ItemForm {
     this.nextCalibrationDate = nextCalibrationDate;
   }
 
-  public String getPicture() {
-    return picture;
-  }
+  public String getPicture() { return picture; }
 
-  public void setPicture(String picture) {
-    this.picture = picture;
-  }
+  public void setPicture(String picture) { this.picture = picture; }
 
-  public String getDescription() {
-    return description;
-  }
+  public String getDescription() { return description; }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+  public void setDescription(String description) { this.description = description; }
 
-  public String getNotes() {
-    return notes;
-  }
+  public String getNotes() { return notes; }
 
-  public void setNotes(String notes) {
-    this.notes = notes;
-  }
+  public void setNotes(String notes) { this.notes = notes; }
 
-  public String getOwner() {
-    return owner;
-  }
+  public String getOwner() { return owner; }
 
-  public void setOwner(String owner) {
-    this.owner = owner;
-  }
+  public void setOwner(String owner) { this.owner = owner; }
 
-  public int getUserId() {
-    return userId;
-  }
+  public int getUserId() { return userId; }
 
-  public void setUserId(int userId) {
-    this.userId = userId;
-  }
+  public void setUserId(int userId) { this.userId = userId; }
 }

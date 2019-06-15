@@ -20,8 +20,8 @@
                 <div class="row">
                     <div class="col-md-8">
                         <p>
-                            <b>ID:</b>
-                            <span th:text="${item.getId()}"></span>
+                            <b>CI ID:</b>
+                            <span th:text="${item.getCiId()}"></span>
                         </p>
                         <p>
                             <b>Registration date:</b>
@@ -36,8 +36,7 @@
                         <p>
                             <b>Calibration interval:</b>
                             <th:block th:unless="${item.getCalibrationInterval()} == 0">
-                            <span
-                                    th:text="${item.getCalibrationInterval()}"></span> months
+                                <span th:text="${item.getCalibrationInterval()}"></span> months
                             </th:block>
                             <span th:if="${item.getCalibrationInterval()} == 0">N/A</span>
                         </p>
@@ -66,14 +65,7 @@
                             <span th:if="${item.getOwner().isEmpty()}">N/A</span>
                         </p>
                         <p><b>Entry created by:</b>
-                            <span>
-                                <a th:if="${item.getOwner()}"
-                                    th:href="'/user/' + ${item.getOwner()}">
-                                </a>
-                            </span>
-<!--                            <th:block th:each="user, iter:${item.getItemCreator()}">-->
-<!--                                <span th:text="${item.getName()} + (${iter.last} ? '' : ', ')"></span><br>-->
-<!--                            </th:block>-->
+                            <span th:text="${item.getUser().getUsername()}"></span>
                         </p>
                     </div>
                     <div class="col-md-4" th:unless="${item.getPicture().isEmpty()}">

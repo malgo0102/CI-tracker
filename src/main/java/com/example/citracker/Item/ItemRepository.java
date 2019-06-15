@@ -8,10 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 @Repository
@@ -24,6 +21,7 @@ public class ItemRepository {
   private Item extractItemFromRowSet(SqlRowSet rs){
     Item item = new Item();
     item.setId(rs.getInt("id"));
+    item.setCiId(rs.getString("ci_id"));
     item.setName(rs.getString("name"));
     Date registrationDate = rs.getDate("registration_date");
     item.setRegistrationDate(registrationDate == null ? null : registrationDate.toLocalDate());
@@ -36,7 +34,7 @@ public class ItemRepository {
     item.setDescription(rs.getString("description"));
     item.setNotes(rs.getString("notes"));
     item.setOwner(rs.getString("owner"));
-    item.setUser(userRepo.findUserById(rs.getInt("item_creator_id")));
+    item.setUser(userRepo.findUserById(rs.getInt("entry_creator_id")));
 
     return item;
   }
@@ -64,19 +62,19 @@ public class ItemRepository {
 
   public void insert(Item item){
     jdbc.update("INSERT INTO items" +
-        "(id, name, registration_date, calibration_date, calibration_interval, " +
-        "next_calibration_date, picture, description, notes, owner, item_creator_id) " +
-        "VALUES(?,?,?,?,?,?,?,?,?,?,?)",
-      item.getId(),item.getName(),item.getRegistrationDate(),item.getCalibrationDate(),
+        "(id, ci_id, name, registration_date, calibration_date, calibration_interval, " +
+        "next_calibration_date, picture, description, notes, owner, entry_creator_id) " +
+        "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+      item.getId(),item.getCiId(),item.getName(),item.getRegistrationDate(),item.getCalibrationDate(),
         item.getCalibrationInterval(), item.getNextCalibrationDate(), item.getPicture(),
         item.getDescription(), item.getNotes(),item.getOwner(), item.getUser().getId());
   }
 
   public void update (Item item){
-    jdbc.update("UPDATE items SET id = ?, name = ?, registration_date =?, calibration_date = ?, " +
+    jdbc.update("UPDATE items SET ci_id = ?, name = ?, registration_date =?, calibration_date = ?, " +
             "calibration_interval = ?, next_calibration_date = ?, picture = ?, description = ?, " +
-            "notes = ?, owner = ?, item_creator_id = ? WHERE id=?;",
-        item.getId(),item.getName(), item.getRegistrationDate(), item.getCalibrationDate(),
+            "notes = ?, owner = ?, entry_creator_id = ? WHERE id=?;",
+        item.getCiId(),item.getName(), item.getRegistrationDate(), item.getCalibrationDate(),
         item.getCalibrationInterval(), item.getNextCalibrationDate(), item.getPicture(),
         item.getDescription(), item.getNotes(),item.getOwner(), item.getUser().getId(), item.getId());
   }
@@ -88,6 +86,7 @@ public class ItemRepository {
     Item item = new Item();
 
     item.setId(itemData.getId());
+    item.setCiId(itemData.getCiId());
     item.setName(itemData.getName());
      LocalDate registrationDate;
      registrationDate = LocalDate.parse(itemData.getRegistrationDate());
@@ -119,15 +118,16 @@ public class ItemRepository {
   }
 
   public List<Item> searchText(String searchWord){
-    List<Item> searchedList = new ArrayList<>();
-    SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM items WHERE MATCH(id, name, " +
-        "registration_date, calibration_date," +
-        "item_creator_id) AGAINST('searchWord' IN BOOLEAN MODE)",searchWord);
+    List<Item> resultList = new ArrayList<>();
+    SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM items WHERE MATCH(name) " +
+        //TODO search through nultiple columns - Multiple-Column Indexes?  full text index
+        //ci_id, name, description,notes, owner
+        "AGAINST(? IN NATURAL LANGUAGE MODE)",searchWord);
 
     while (rs.next()){
-      searchedList.add(extractItemFromRowSet(rs));
+      resultList.add(extractItemFromRowSet(rs));
     }
-    return searchedList;
+    return resultList;
   }
 
 

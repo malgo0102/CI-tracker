@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -37,9 +36,8 @@ public class ItemController {
 
   @PostMapping("/manage/items/add")
   public String save(@ModelAttribute ItemForm itemForm) {
-    Item item = new Item();
-    item.setRegistrationDate(LocalDate.now());
-    item = itemRepo.convertFormToItem(itemForm);
+    itemForm.setRegistrationDate(LocalDate.now().toString());
+    Item item = itemRepo.convertFormToItem(itemForm);
     itemRepo.insert(item);
 
     return "redirect:/";
@@ -73,8 +71,8 @@ public class ItemController {
     itemForm.setOwner(item.getOwner());
     itemForm.setUserId(item.getUser().getId());
 
-    m.addAttribute("itemform",itemForm);
     m.addAttribute("userlist", userRepo.findAllUsers());
+    m.addAttribute("itemform",itemForm);
 
     return "items/edit-item";
   }
@@ -102,11 +100,12 @@ public class ItemController {
     return "redirect:/";
   }
 
-  @GetMapping("/search")
+  @GetMapping("/search_result")
   public String searchResult(@RequestParam (name="searchWord") String searchWord, Model m){
     List<Item> resultList = itemRepo.searchText(searchWord);
     m.addAttribute("resultlist",resultList);
 
     return "items/searched-item";
   }
+
 }

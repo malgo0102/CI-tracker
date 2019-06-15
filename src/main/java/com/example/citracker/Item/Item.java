@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 public class Item {
   private int id;
+  private String ciId;
   private String name;
   private LocalDate registrationDate;
   private LocalDate calibrationDate;
@@ -27,6 +28,10 @@ public class Item {
   public void setId(int id) {
     this.id = id;
   }
+
+  public String getCiId() { return ciId; }
+
+  public void setCiId(String ciId) { this.ciId = ciId; }
 
   public String getName() {
     return name;

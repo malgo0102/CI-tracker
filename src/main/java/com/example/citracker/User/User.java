@@ -4,6 +4,7 @@ public class User {
 
   private int id;
   private String username;
+  //TODO hashed password
   private String password;
   private String email;
   private int phoneNo;

@@ -13,12 +13,9 @@
     <main class="flex-fill">
         <div class="container">
             <div class="jumbotron">
-                <h1 class="display-4">Search result</h1>
-                <form action="/manage/search/" method="post" th:object="${resultlist}">
-                    <div class="form-group">
-                        <label for="id" class="font-weight-bold">Search:</label>
-                        <input type="text" class="form-control" th:field="${searchWord}" id="id">
-                    </div>
+                <h1 class="display-4">Search result:</h1>
+                <form action="/search_result/" method="get" th:object="${resultlist}">
+
                 <table class="table table-sm table-hover">
                     <thead>
                     <tr>
@@ -56,12 +53,12 @@
                         <!--                        <td th:text="${item.itemCreator}"></td>-->
 
                         <td>
-                            <a class="btn btn-outline-secondary" th:href="'/manage/items/edit/' + ${item.id}">
+                            <a class="btn btn-outline-secondary" th:href="'/manage/items/edit/' + ${result.id}">
                                 Edit
                             </a>
                         </td>
                         <td>
-                            <a class="btn btn-outline-danger" th:href="'/manage/items/delete/' + ${item.id}">
+                            <a class="btn btn-outline-danger" th:href="'/manage/items/delete/' + ${result.id}">
                                 Delete
                             </a>
                         </td>

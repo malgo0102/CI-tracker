@@ -12,7 +12,8 @@ CREATE TABLE users
 );
 
 CREATE TABLE items(
-	id 						INT UNIQUE NOT NULL,
+	id 						INT NOT NULL UNIQUE AUTO_INCREMENT,
+	ci_id					VARCHAR(255) UNIQUE NOT NULL,
 	name 					VARCHAR(255) NOT NULL,
 	registration_date 		TIMESTAMP NOT NULL,
 	calibration_date 		DATE,
@@ -22,9 +23,11 @@ CREATE TABLE items(
 	description 			TEXT,
 	notes					TEXT,
 	owner					VARCHAR(255),
-    item_creator_id 		INT,
+    entry_creator_id	 	INT,
 
 	PRIMARY KEY (id),
-    FOREIGN KEY (item_creator_id) REFERENCES users (id)
+    FOREIGN KEY (entry_creator_id) REFERENCES users (id)
+	
+	ADD FULLTEXT(ci_id, name, description,notes, owner);
 );
 
