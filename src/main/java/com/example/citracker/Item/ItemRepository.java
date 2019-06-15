@@ -119,7 +119,7 @@ public class ItemRepository {
 
   public List<Item> searchText(String searchWord){
     List<Item> resultList = new ArrayList<>();
-    SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM items WHERE MATCH(name) " +
+    SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM items WHERE MATCH(ci_id, name, description,notes, owner) " +
         //TODO search through nultiple columns - Multiple-Column Indexes?  full text index
         //ci_id, name, description,notes, owner
         "AGAINST(? IN NATURAL LANGUAGE MODE)",searchWord);

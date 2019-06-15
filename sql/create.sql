@@ -27,7 +27,7 @@ CREATE TABLE items(
 
 	PRIMARY KEY (id),
     FOREIGN KEY (entry_creator_id) REFERENCES users (id)
-	
-	ADD FULLTEXT(ci_id, name, description,notes, owner);
+
+	CREATE FULLTEXT INDEX multicolumn ON items (ci_id, name, description,notes, owner);
 );
 

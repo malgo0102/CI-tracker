@@ -19,7 +19,7 @@
                 <table class="table table-sm table-hover">
                     <thead>
                     <tr>
-                        <th scope="col">ID:</th>
+                        <th scope="col">CI ID:</th>
                         <th scope="col">Name:</th>
                         <!--                        <th scope="col">Registration date:</th>-->
                         <!--                        <th scope="col">Calibration date:</th>-->
@@ -36,7 +36,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="result:${resultlist}">
-                        <td th:text="${result.id}"></td>
+                        <td th:text="${result.ciId}"></td>
                         <td>
                             <a th:text="${result.name}"
                                th:href="'/item/' + ${result.getId()}">

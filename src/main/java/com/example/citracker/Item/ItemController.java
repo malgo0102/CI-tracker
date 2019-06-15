@@ -50,6 +50,7 @@ public class ItemController {
     ItemForm itemForm = new ItemForm();
 
     itemForm.setId(id);
+    itemForm.setCiId(item.getCiId());
     itemForm.setName(item.getName());
     itemForm.setRegistrationDate(item.getRegistrationDate().toString());
     if(item.getCalibrationDate()== null){
