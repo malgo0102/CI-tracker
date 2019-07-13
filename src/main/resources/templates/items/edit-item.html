@@ -35,7 +35,7 @@
 <!--                    </div>-->
                     <div class="form-group">
                         <label for="calibration_date">Calibration date:</label>
-                        <input type="text" class="form-control" th:field="${itemform.calibrationDate}" id="calibration_date">
+                        <input type="date" class="form-control" th:field="${itemform.calibrationDate}" id="calibration_date">
                     </div>
                     <div class="form-group">
                         <label for="calibration_interval">Calibration interval:</label>
@@ -43,11 +43,11 @@
                     </div>
                     <div class="form-group">
                         <label for="next_calibration_date">Next calibration date:</label>
-                        <input type="text" class="form-control" th:field="${itemform.nextCalibrationDate}" id="next_calibration_date">
+                        <input type="date" class="form-control" th:field="${itemform.nextCalibrationDate}" id="next_calibration_date">
                     </div>
                     <div class="form-group">
                         <label for="picture">Picture:</label>
-                        <input type="text" class="form-control" th:field="${itemform.picture}" id="picture">
+                        <input type="file" class="form-control" th:field="${itemform.picture}" id="picture">
                     </div>
                     <div class="form-group">
                         <label for="description">Description:</label>

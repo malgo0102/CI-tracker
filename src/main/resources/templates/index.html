@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <title>Items</title>
@@ -25,7 +25,7 @@
                 <br>
                 <hr>
                 <th scope="col">
-                    <a class="btn btn-outline-dark" th:href="'/manage/items/add'">
+                    <a class="btn btn-outline-dark" th:href="'/manage/items/add'" sec:authorize="authenticated">
                         Add item
                     </a>
                 </th>
@@ -67,12 +67,12 @@
 <!--                        <td th:text="${item.itemUser}"></td>-->
 
                         <td>
-                            <a class="btn btn-outline-secondary" th:href="'/manage/items/edit/' + ${item.id}">
+                            <a class="btn btn-outline-secondary" th:href="'/manage/items/edit/' + ${item.id}" sec:authorize="authenticated">
                                 Edit
                             </a>
                         </td>
                         <td>
-                            <a class="btn btn-outline-danger" th:href="'/manage/items/delete/' + ${item.id}">
+                            <a class="btn btn-outline-danger" th:href="'/manage/items/delete/' + ${item.id}" sec:authorize="authenticated">
                                 Delete
                             </a>
                         </td>

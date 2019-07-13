@@ -15,7 +15,7 @@
             <div class="jumbotron">
                 <h1 class="display-4">Add an user</h1>
                 <hr>
-                <form action="/manage/users/add" method="post" th:object="${userform}">
+                <form action="/users/add" method="post" th:object="${userform}">
                     <input type="hidden" th:field="${userform.id}">
                     <div class="form-group">
                         <label for="username" class="font-weight-bold">Username:</label>
@@ -23,15 +23,15 @@
                     </div>
                     <div class="form-group">
                         <label for="password" class="font-weight-bold">Password:</label>
-                        <input type="text" class="form-control" th:field="${userform.password}" id="password">
+                        <input type="password" class="form-control" th:field="${userform.password}" id="password">
                     </div>
                     <div class="form-group">
                         <label for="email">E-mail:</label>
-                        <input type="text" class="form-control" th:field="${userform.email}" id="email">
+                        <input type="email" class="form-control" th:field="${userform.email}" id="email">
                     </div>
                     <div class="form-group">
                         <label for="phone_no">Phone no:</label>
-                        <input type="text" class="form-control" th:field="${userform.phoneNo}" id="phone_no">
+                        <input type="tel" class="form-control" th:field="${userform.phoneNo}" id="phone_no">
                     </div>
                     <div class="form-group">
                         <label for="full_name">Full name:</label>

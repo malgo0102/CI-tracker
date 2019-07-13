@@ -68,9 +68,11 @@
                             <span th:text="${item.getUser().getUsername()}"></span>
                         </p>
                     </div>
-                    <div class="col-md-4" th:unless="${item.getPicture().isEmpty()}">
-                        <img th:if="${item.getPicture()}" th:src="${item.getPicture()}"
-                             th:alt="'Picture for ' + ${item.getName()}" class="img-fluid">
+                    <div class="col-md-4">
+                        <span th:unless="${item.getPicture().isEmpty()}">
+<!--                        TODO select designated image folder-->
+                            <img th:src="@{'/img/'+${item.getPicture()}}" alt=""></span>
+                        <span th:if="${item.getPicture().isEmpty()}"> <b>Picture: </b>N/A</span>
                     </div>
                 </div>
                 <hr>

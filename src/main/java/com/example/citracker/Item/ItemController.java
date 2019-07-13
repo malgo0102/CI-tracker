@@ -37,7 +37,7 @@ public class ItemController {
   @PostMapping("/manage/items/add")
   public String save(@ModelAttribute ItemForm itemForm) {
     itemForm.setRegistrationDate(LocalDate.now().toString());
-    Item item = itemRepo.convertFormToItem(itemForm);
+    Item item = convertFormToItem(itemForm);
     itemRepo.insert(item);
 
     return "redirect:/";
@@ -80,7 +80,7 @@ public class ItemController {
 
   @PostMapping("/manage/items/edit")
   public String update(@ModelAttribute ItemForm itemForm){
-    Item item = itemRepo.convertFormToItem(itemForm);
+    Item item = convertFormToItem(itemForm);
     itemRepo.update(item);
 
     return "redirect:/";
@@ -107,6 +107,41 @@ public class ItemController {
     m.addAttribute("resultlist",resultList);
 
     return "items/searched-item";
+  }
+
+  public Item convertFormToItem(ItemForm itemData) {
+    Item item = new Item();
+
+    item.setId(itemData.getId());
+    item.setCiId(itemData.getCiId());
+    item.setName(itemData.getName());
+    LocalDate registrationDate;
+    registrationDate = LocalDate.parse(itemData.getRegistrationDate());
+    item.setRegistrationDate(registrationDate);
+    if(itemData.getCalibrationDate()== ("")){
+      item.setCalibrationDate(null);
+    }
+    else{
+      LocalDate calibrationDate;
+      calibrationDate = LocalDate.parse(itemData.getCalibrationDate());
+      item.setCalibrationDate(calibrationDate);
+    }
+    item.setCalibrationInterval(itemData.getCalibrationInterval());
+    if(itemData.getNextCalibrationDate()== ("")){
+      item.setNextCalibrationDate(null);
+    }
+    else{
+      LocalDate nextCalibrationDate;
+      nextCalibrationDate = LocalDate.parse(itemData.getNextCalibrationDate());
+      item.setNextCalibrationDate(nextCalibrationDate);
+    }
+    item.setPicture(itemData.getPicture());
+    item.setDescription(itemData.getDescription());
+    item.setNotes(itemData.getNotes());
+    item.setOwner(itemData.getOwner());
+    item.setUser(userRepo.findUserById(itemData.getUserId()));
+
+    return item;
   }
 
 }

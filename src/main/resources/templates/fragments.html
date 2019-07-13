@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title></title>
     <meta charset="UTF-8">
@@ -19,16 +19,16 @@
     <div class="collapse navbar-collapse" entryId="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/manage/users">Users</a>
+                <a class="nav-link" href="/manage/users" sec:authorize="authenticated">Users</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/manage/users/add">Register</a>
+                <a class="nav-link" href="/users/add">Register</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="/login" sec:authorize="!authenticated">Login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
+                <a class="nav-link" href="/logout" sec:authorize="authenticated">Logout</a>
             </li>
         </ul>
     </div>

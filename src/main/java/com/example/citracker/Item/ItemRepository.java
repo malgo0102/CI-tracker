@@ -82,46 +82,10 @@ public class ItemRepository {
     jdbc.update("DELETE FROM items WHERE id = ?", id);
   }
 
-  public Item convertFormToItem(ItemForm itemData) {
-    Item item = new Item();
-
-    item.setId(itemData.getId());
-    item.setCiId(itemData.getCiId());
-    item.setName(itemData.getName());
-     LocalDate registrationDate;
-     registrationDate = LocalDate.parse(itemData.getRegistrationDate());
-    item.setRegistrationDate(registrationDate);
-    if(itemData.getCalibrationDate()== ("")){
-      item.setCalibrationDate(null);
-    }
-    else{
-      LocalDate calibrationDate;
-      calibrationDate = LocalDate.parse(itemData.getCalibrationDate());
-      item.setCalibrationDate(calibrationDate);
-    }
-    item.setCalibrationInterval(item.getCalibrationInterval());
-    if(itemData.getNextCalibrationDate()== ("")){
-      item.setNextCalibrationDate(null);
-    }
-    else{
-      LocalDate nextCalibrationDate;
-      nextCalibrationDate = LocalDate.parse(itemData.getNextCalibrationDate());
-      item.setNextCalibrationDate(nextCalibrationDate);
-    }
-    item.setPicture(itemData.getPicture());
-    item.setDescription(itemData.getDescription());
-    item.setNotes(itemData.getNotes());
-    item.setOwner(itemData.getOwner());
-    item.setUser(userRepo.findUserById(itemData.getUserId()));
-
-    return item;
-  }
-
   public List<Item> searchText(String searchWord){
     List<Item> resultList = new ArrayList<>();
-    SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM items WHERE MATCH(ci_id, name, description,notes, owner) " +
-        //TODO search through nultiple columns - Multiple-Column Indexes?  full text index
-        //ci_id, name, description,notes, owner
+    SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM items WHERE MATCH(ci_id, name, " +
+        "description,notes, owner) " +
         "AGAINST(? IN NATURAL LANGUAGE MODE)",searchWord);
 
     while (rs.next()){

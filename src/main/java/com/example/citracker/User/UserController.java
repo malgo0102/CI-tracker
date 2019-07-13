@@ -20,14 +20,14 @@ public class UserController {
     return "users/view-users";
   }
 
-  @GetMapping("manage/users/add")
+  @GetMapping("/users/add")
   public String create(Model m) {
     m.addAttribute("userform", new User());
 
     return "users/add-user";
   }
 
-  @PostMapping("/manage/users/add")
+  @PostMapping("/users/add")
   public String save(@ModelAttribute User u) {
     userRepo.insert(u);
 
@@ -60,6 +60,20 @@ public class UserController {
     userRepo.delete(id);
 
     return "redirect:/manage/users";
+  }
+
+  @GetMapping(value = "/login")
+  public String showLogin(@RequestParam(value = "error", required = false) String error, String logout, Model model) {
+
+    if (logout != null) {
+      model.addAttribute("logoutmsg", "You've been logged out");
+    }
+
+    if (error == null || !error.isEmpty()) {
+      model.addAttribute("error", error);
+    }
+
+    return "users/login";
   }
 
 
