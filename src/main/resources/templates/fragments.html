@@ -22,7 +22,7 @@
                 <a class="nav-link" href="/manage/users" sec:authorize="authenticated">Users</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/users/add">Register</a>
+                <a class="nav-link" href="/users/add" sec:authorize="!authenticated">Register</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/login" sec:authorize="!authenticated">Login</a>

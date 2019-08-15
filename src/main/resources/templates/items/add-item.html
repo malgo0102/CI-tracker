@@ -19,11 +19,11 @@
                     <input type="hidden" th:field="${itemform.id}">
                     <div class="form-group">
                         <label for="ci_id" class="font-weight-bold">CI ID:</label>
-                        <input type="text" class="form-control" th:field="${itemform.ciId}" id="ci_id">
+                        <input type="text" class="form-control" th:field="${itemform.ciId}" id="ci_id" required>
                     </div>
                     <div class="form-group">
                         <label for="name" class="font-weight-bold">Name:</label>
-                        <input type="text" class="form-control" th:field="${itemform.name}" id="name">
+                        <input type="text" class="form-control" th:field="${itemform.name}" id="name" required>
                     </div>
                     <div class="form-group">
                         <label for="calibration_date">Calibration date:</label>
@@ -37,29 +37,14 @@
                         <label for="next_calibration_date">Next calibration date:</label>
                         <input type="date" class="form-control" th:field="${itemform.nextCalibrationDate}" id="next_calibration_date">
                     </div>
-
-                    <div class="form-group">
-                        <label for="picture">Picture:</label>
-                        <input type="file" class="form-control" th:field="${itemform.picture}" id="picture">
-                    </div>
-
-                    <div>
-                        <form method="POST" enctype="multipart/form-data" action="/">
+<!--                    <div>-->
+<!--                        <form method="POST" enctype="multipart/form-data" th:action="/">-->
                             <table>
                                 <tr><td>Picture:</td><td><input type="file" name="file" /></td></tr>
                                 <tr><td></td><td><input type="submit" value="Upload" /></td></tr>
                             </table>
-                        </form>
-                    </div>
-
-                    <div>
-                        <ul>
-                            <li th:each="file : ${files}">
-                                <a th:href="${file}" th:text="${file}" />
-                            </li>
-                        </ul>
-                    </div>
-
+<!--                        </form>-->
+<!--                    </div>-->
                     <div class="form-group">
                         <label for="description">Description:</label>
                         <input type="text" class="form-control" th:field="${itemform.description}" id="description">

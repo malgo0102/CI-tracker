@@ -73,6 +73,12 @@
 <!--                        TODO select designated image folder-->
                             <img th:src="@{'/img/'+${item.getPicture()}}" alt=""></span>
                         <span th:if="${item.getPicture().isEmpty()}"> <b>Picture: </b>N/A</span>
+                        <ul>
+                            <li th:each="file : ${files}">
+                                <a th:href="${file}" target="_blank" th:text="${file}"></a>
+                            </li>
+                        </ul>
+
                     </div>
                 </div>
                 <hr>

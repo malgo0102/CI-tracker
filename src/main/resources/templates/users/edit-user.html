@@ -18,15 +18,24 @@
                     </p>
                 </h1>
                 <hr>
+                <div th:if="${error}" class="alert alert-danger">
+                    <span th:if="${error.equals('username_taken')}">Username taken. Try again.</span>
+                    <span th:if="${error.equals('password_dont_match')}">The password must match. Try again.</span>
+                </div>
                 <form action="/manage/users/edit/" method="post" th:object="${user}">
                     <input type="hidden" th:field="${user.id}">
                     <div class="form-group">
                         <label for="username" class="font-weight-bold">Username:</label>
-                        <input type="text" class="form-control" th:field="${user.username}" id="username">
+                        <input type="text" class="form-control" th:field="${user.username}" id="username" required>
                     </div>
                     <div class="form-group">
-                        <label for="password" class="font-weight-bold">Password:</label>
-                        <input type="password" class="form-control" th:field="${user.password}" id="password">
+                        <label for="password" class="font-weight-bold">New password:</label>
+                        <input type="password" class="form-control" th:field="${user.password}" id="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="font-weight-bold">Confirm password:</label>
+                        <input type="password" class="form-control"
+                               id="confPassword" name="confPassword" required>
                     </div>
                     <div class="form-group">
                         <label for="email">E-mail:</label>
