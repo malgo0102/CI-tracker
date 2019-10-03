@@ -68,18 +68,18 @@
                             <span th:text="${item.getUser().getUsername()}"></span>
                         </p>
                     </div>
-                    <div class="col-md-4">
-                        <span th:unless="${item.getPicture().isEmpty()}">
-<!--                        TODO select designated image folder-->
-                            <img th:src="@{'/img/'+${item.getPicture()}}" alt=""></span>
-                        <span th:if="${item.getPicture().isEmpty()}"> <b>Picture: </b>N/A</span>
-                        <ul>
-                            <li th:each="file : ${files}">
-                                <a th:href="${file}" target="_blank" th:text="${file}"></a>
-                            </li>
-                        </ul>
+<!--                    <div class="col-md-4">-->
+<!--                        <span th:unless="${item.getPicture().isEmpty()}">-->
+<!--&lt;!&ndash;                        TODO select designated image folder&ndash;&gt;-->
+<!--                            <img th:src="@{'/img/'+${item.getPicture()}}" alt=""></span>-->
+<!--                        <span th:if="${item.getPicture().isEmpty()}"> <b>Picture: </b>N/A</span>-->
+<!--                        <ul>-->
+<!--                            <li th:each="file : ${files}">-->
+<!--                                <a th:href="${file}" target="_blank" th:text="${file}"></a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
 
-                    </div>
+<!--                    </div>-->
                 </div>
                 <hr>
             </div>
